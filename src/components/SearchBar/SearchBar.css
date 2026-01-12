@@ -1,0 +1,26 @@
+/* src/components/SearchBar/SearchBar.css */
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.search-bar input {
+    width: 100%;
+    max-width: 500px;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 50px;
+    /* Bordes muy redondeados */
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.search-bar input:focus {
+    border-color: #3498db;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+    width: 105%;
+    /* Efecto de expansión suave */
+}

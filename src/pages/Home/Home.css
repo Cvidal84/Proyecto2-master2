@@ -1,0 +1,21 @@
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.loading-text,
+.no-results {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 50px;
+}

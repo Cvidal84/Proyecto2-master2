@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 import Navbar from './components/Navbar/Navbar'
 import Home from './pages/Home/Home'
+import Cart from './pages/Cart/Cart'
 
 const App = () => {
   const [cart, setCart] = useState([])
@@ -27,7 +28,7 @@ const App = () => {
           <Route path="/contact" element={<h2>Contact Us</h2>} />
 
           {/* Ruta del carrito */}
-          <Route path="/cart" element={<h2>Your Shopping Cart ({cart.length} items)</h2>} />
+          <Route path="/cart" element={<Cart cartItems={cart} />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -1,8 +1,8 @@
 import './Cart.css';
 
-const Cart = ({ cartItems }) => {
-    // Calculamos el precio total sumando todos los productos
-    const total = cartItems.reduce((acc, item) => acc + item.price, 0);
+const Cart = ({ cartItems, removeFromCart }) => {
+
+    const total = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
 
     return (
         <div className="cart-page">
@@ -13,13 +13,21 @@ const Cart = ({ cartItems }) => {
             ) : (
                 <div className="cart-container">
                     <div className="cart-list">
-                        {cartItems.map((item, index) => (
-                            /* Usamos index porque el mismo ID puede repetirse si compras dos veces lo mismo */
-                            <div key={index} className="cart-item">
+                        {cartItems.map((item) => (
+                            <div key={item.id} className="cart-item">
                                 <img src={item.image} alt={item.title} />
                                 <div className="cart-item-info">
                                     <h4>{item.title}</h4>
-                                    <p className="cart-item-price">{item.price}€</p>
+                                    <p className="cart-item-price">
+                                        {item.price}€
+                                        {item.quantity > 1 && <span className="quantity-badge"> x{item.quantity}</span>}
+                                    </p>
+                                    <button
+                                        className="remove-btn"
+                                        onClick={() => removeFromCart(item.id)}
+                                    >
+                                        Eliminar
+                                    </button>
                                 </div>
                             </div>
                         ))}
@@ -27,7 +35,6 @@ const Cart = ({ cartItems }) => {
 
                     <div className="cart-summary">
                         <h3>Summary</h3>
-                        <p>Total of products: {cartItems.length}</p>
                         <p className="total-amount">Total to pay: <span>{total.toFixed(2)}€</span></p>
                         <button className="checkout-btn">Checkout</button>
                     </div>

@@ -1,4 +1,5 @@
 import './Cart.css';
+import { Link } from 'react-router-dom';
 
 const Cart = ({ cartItems, removeFromCart }) => {
 
@@ -36,7 +37,7 @@ const Cart = ({ cartItems, removeFromCart }) => {
                     <div className="cart-summary">
                         <h3>Summary</h3>
                         <p className="total-amount">Total to pay: <span>{total.toFixed(2)}€</span></p>
-                        <button className="checkout-btn">Checkout</button>
+                        <button className="checkout-btn"><Link to="/checkout">Checkout</Link></button>
                     </div>
                 </div>
             )}

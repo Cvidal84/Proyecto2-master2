@@ -5,6 +5,8 @@ import Navbar from './components/Navbar/Navbar'
 import Home from './pages/Home/Home'
 import Cart from './pages/Cart/Cart'
 import ProductDetail from './pages/ProductDetail/ProductDetail'
+import Checkout from './pages/Checkout/Checkout'
+import Success from './pages/Success/Success'
 
 const App = () => {
   const [cart, setCart] = useState([])
@@ -33,6 +35,9 @@ const App = () => {
     setCart(cart.filter((item) => item.id !== productId));
   };
 
+  // Función para vaciar el carrito
+  const clearCart = () => setCart([]);
+
   return (
     <BrowserRouter>
       {/* Navbar se queda fuera de Routes para que siempre sea visible */}
@@ -52,6 +57,12 @@ const App = () => {
 
           {/* Ruta del detalle del producto */}
           <Route path="/product/:id" element={<ProductDetail addToCart={addToCart} />} />
+
+          {/* Ruta de checkout */}
+          <Route path="/checkout" element={<Checkout cartItems={cart} clearCart={clearCart} />} />
+
+          {/* Ruta de exito */}
+          <Route path="/success" element={<Success />} />
         </Routes>
       </div>
     </BrowserRouter>

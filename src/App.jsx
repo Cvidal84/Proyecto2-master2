@@ -4,6 +4,7 @@ import './App.css'
 import Navbar from './components/Navbar/Navbar'
 import Home from './pages/Home/Home'
 import Cart from './pages/Cart/Cart'
+import ProductDetail from './pages/ProductDetail/ProductDetail'
 
 const App = () => {
   const [cart, setCart] = useState([])
@@ -48,6 +49,9 @@ const App = () => {
 
           {/* Ruta del carrito */}
           <Route path="/cart" element={<Cart cartItems={cart} removeFromCart={removeFromCart} />} />
+
+          {/* Ruta del detalle del producto */}
+          <Route path="/product/:id" element={<ProductDetail addToCart={addToCart} />} />
         </Routes>
       </div>
     </BrowserRouter>

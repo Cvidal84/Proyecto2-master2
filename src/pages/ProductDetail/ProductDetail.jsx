@@ -20,11 +20,13 @@ const ProductDetail = ({ addToCart }) => {
 
     return (
         <div className="product-detail">
-            <img src={product.image} alt={product.title} />
-            <h2>{product.title}</h2>
-            <p className="product-price">{product.price}€</p>
-            <p className="product-description">{product.description}</p>
-            <button onClick={() => addToCart(product)}>Add to Cart</button>
+            <div className="product-detail-card">
+                <img src={product.image} alt={product.title} />
+                <h2>{product.title}</h2>
+                <p className="product-price">{product.price}€</p>
+                <p className="product-description">{product.description}</p>
+                <button onClick={() => addToCart(product)}>Add to Cart</button>
+            </div>
         </div>
     )
 }

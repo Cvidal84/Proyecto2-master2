@@ -9,6 +9,7 @@ import Checkout from './pages/Checkout/Checkout'
 import Success from './pages/Success/Success'
 import SplashScreen from './components/SplashScreen/SplashScreen'
 import About from './pages/About/About'
+import Contact from './pages/Contact/Contact'
 
 const App = () => {
   const [cart, setCart] = useState([])
@@ -62,7 +63,7 @@ const App = () => {
 
             {/* Rutas secundarias */}
             <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<h2>Contact Us</h2>} />
+            <Route path="/contact" element={<Contact />} />
 
             {/* Ruta del carrito */}
             <Route path="/cart" element={<Cart cartItems={cart} removeFromCart={removeFromCart} />} />

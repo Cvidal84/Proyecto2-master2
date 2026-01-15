@@ -11,6 +11,10 @@
     padding: 10px 20px;
 }
 
+.about-hero h1 {
+    color: #fff;
+}
+
 .navbar-logo h2 {
     margin: 0;
     color: #3498db;
@@ -47,10 +51,13 @@
     top: -8px;
     right: -12px;
     background-color: #e74c3c;
-    color: white;
     font-size: 0.7rem;
     padding: 2px 6px;
     border-radius: 50%;
+}
+
+.value-card p {
+    color: #333;
 }
 
 @media (max-width: 768px) {

@@ -8,6 +8,7 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid #eee;
     height: auto;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.265);
 }
 
 .card:hover {
@@ -26,6 +27,7 @@
 .card h3 {
     font-size: 1.1rem;
     color: #2c3e50;
+    text-align: center;
     margin: 10px 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;

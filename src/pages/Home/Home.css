@@ -19,3 +19,8 @@ h1 {
     color: #666;
     margin-top: 50px;
 }
+
+.search-bar input {
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

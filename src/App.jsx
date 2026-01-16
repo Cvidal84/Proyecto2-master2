@@ -10,9 +10,10 @@ import Success from './pages/Success/Success'
 import SplashScreen from './components/SplashScreen/SplashScreen'
 import About from './pages/About/About'
 import Contact from './pages/Contact/Contact'
+import { CartProvider } from './context/CartContext'
+import NotFound from './pages/404/404'
 
 const App = () => {
-  const [cart, setCart] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -24,61 +25,41 @@ const App = () => {
     return () => clearTimeout(timer)
   }, [])
 
-  const addToCart = (product) => {
-    setCart((prevCart) => {
-      // Buscamos si el producto ya está en el carrito
-      const isProductInCart = prevCart.find((item) => item.id === product.id);
-
-      if (isProductInCart) {
-        // Si está, mapeamos el carrito y sumamos 1 a la cantidad del producto coincidente
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
-      // Si no está, lo añadimos con cantidad 1
-      return [...prevCart, { ...product, quantity: 1 }];
-    });
-  };
-
-  const removeFromCart = (productId) => {
-    // Filtramos para quitar el producto completamente por su ID
-    setCart(cart.filter((item) => item.id !== productId));
-  };
-
-  const clearCart = () => setCart([]);
-
   return (
     <>
       {loading && <SplashScreen />}
-      <BrowserRouter>
-        {/* Navbar se queda fuera de Routes para que siempre sea visible */}
-        <Navbar cartCount={cart.reduce((acc, item) => acc + item.quantity, 0)} />
+      <CartProvider>
+        <BrowserRouter>
+          {/* Navbar se queda fuera de Routes para que siempre sea visible */}
+          <Navbar />
 
-        <div className='app-container'>
-          <Routes>
-            {/* Ruta principal (Home) */}
-            <Route path="/" element={<Home addToCart={addToCart} />} />
+          <div className='app-container'>
+            <Routes>
+              {/* Ruta principal (Home) */}
+              <Route path="/" element={<Home />} />
 
-            {/* Rutas secundarias */}
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
+              {/* Rutas secundarias */}
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
 
-            {/* Ruta del carrito */}
-            <Route path="/cart" element={<Cart cartItems={cart} removeFromCart={removeFromCart} />} />
+              {/* Ruta del carrito */}
+              <Route path="/cart" element={<Cart />} />
 
-            {/* Ruta del detalle del producto */}
-            <Route path="/product/:id" element={<ProductDetail addToCart={addToCart} />} />
+              {/* Ruta del detalle del producto */}
+              <Route path="/product/:id" element={<ProductDetail />} />
 
-            {/* Ruta de checkout */}
-            <Route path="/checkout" element={<Checkout cartItems={cart} clearCart={clearCart} />} />
+              {/* Ruta de checkout */}
+              <Route path="/checkout" element={<Checkout />} />
 
-            {/* Ruta de exito */}
-            <Route path="/success" element={<Success />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
+              {/* Ruta de exito */}
+              <Route path="/success" element={<Success />} />
+
+              {/* Ruta de 404 */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+        </BrowserRouter>
+      </CartProvider>
     </>
   )
 }

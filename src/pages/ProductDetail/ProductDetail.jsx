@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import './ProductDetail.css';
+import { useCart } from "../../context/CartContext";
 
-const ProductDetail = ({ addToCart }) => {
+const ProductDetail = () => {
+    const { addToCart } = useCart();
     const { id } = useParams(); // Obtenemos el ID del producto
     const [product, setProduct] = useState(null); // Inicializamos el producto
     const [loading, setLoading] = useState(true); // Inicializamos el loading

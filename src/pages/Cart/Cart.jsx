@@ -1,8 +1,9 @@
 import './Cart.css';
 import { Link } from 'react-router-dom';
+import { useCart } from '../../context/CartContext';
 
-const Cart = ({ cartItems, removeFromCart }) => {
-
+const Cart = () => {
+    const { cart: cartItems, removeFromCart } = useCart();
     const total = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
 
     return (
@@ -37,7 +38,7 @@ const Cart = ({ cartItems, removeFromCart }) => {
                     <div className="cart-summary">
                         <h3>Summary</h3>
                         <p className="total-amount">Total to pay: <span>{total.toFixed(2)}€</span></p>
-                        <button className="checkout-btn"><Link to="/checkout">Checkout</Link></button>
+                        <Link to="/checkout" className="shopping-button">Checkout</Link>
                     </div>
                 </div>
             )}

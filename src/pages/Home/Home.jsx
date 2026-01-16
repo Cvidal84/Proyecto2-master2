@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import ProductCard from '../../components/ProductCard/ProductCard'
 import './Home.css'
+import { useCart } from '../../context/CartContext'
 
-const Home = ({ addToCart }) => {
+const Home = () => {
+    const { addToCart } = useCart();
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
     const [searchTerm, setSearchTerm] = useState('')

@@ -1,7 +1,11 @@
-import { Link } from 'react-router-dom'; // Importante importar Link
+import { Link } from 'react-router-dom';
 import './Navbar.css'
+import { useCart } from '../../context/CartContext';
 
-const Navbar = ({ cartCount }) => {
+const Navbar = () => {
+    const { cart } = useCart();
+    const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+
     return (
         <nav className="navbar">
             <div className="navbar-logo">

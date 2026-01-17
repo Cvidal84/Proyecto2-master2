@@ -27,6 +27,7 @@ const ProductDetail = () => {
                 <h2>{product.title}</h2>
                 <p className="product-price">{product.price}€</p>
                 <p className="product-description">{product.description}</p>
+                <p className="product-rating">Rating: {product.rating.rate} ({product.rating.count} reviews)</p>
                 <button onClick={() => addToCart(product)}>Add to Cart</button>
             </div>
         </div>

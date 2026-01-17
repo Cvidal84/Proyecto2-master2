@@ -17,7 +17,7 @@ const App = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Wait for the animation to finish (3s delay + 0.5s fadeOut)
+    // Esperar que pase la animación(3s d + 0.5s fadeOut)
     const timer = setTimeout(() => {
       setLoading(false)
     }, 3500)

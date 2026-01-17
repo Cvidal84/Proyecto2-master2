@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { products as mockProducts } from '../../data/products'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import ProductCard from '../../components/ProductCard/ProductCard'
 import './Home.css'
@@ -12,7 +13,10 @@ const Home = () => {
 
     useEffect(() => {
         console.log("Fetching products...");
-        fetch('https://fakestoreapi.com/products')
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+
+        fetch('https://fakestoreapi.com/products', { signal: controller.signal })
             .then(res => {
                 if (!res.ok) {
                     throw new Error(`HTTP error! status: ${res.status}`);
@@ -20,15 +24,19 @@ const Home = () => {
                 return res.json();
             })
             .then(json => {
-                console.log("Products loaded:", json);
+                console.log("Products loaded from API:", json);
                 setProducts(json)
                 setLoading(false)
+                clearTimeout(timeoutId);
             })
-            .catch(error => {
-                console.error("Error loading products:", error)
-                setError(error.message)
-                setLoading(false)
+            .catch(err => {
+                console.warn("Fetch failed or timed out, using mock data.", err);
+                setProducts(mockProducts);
+                setError("API unavailable. Showing offline data.");
+                setLoading(false);
             })
+
+        return () => clearTimeout(timeoutId);
     }, [])
 
     const filteredProducts = products.filter(product =>
@@ -42,9 +50,18 @@ const Home = () => {
             {loading ? (
                 <p>Loading products...</p>
             ) : error ? (
-                <div className="error-message">
-                    <p>Error loading products: {error}</p>
-                    <p>Please check your internet connection and try again.</p>
+                <div>
+                    <div className="error-message" style={{ backgroundColor: '#fff3cd', color: '#856404', padding: '10px', marginBottom: '10px', borderRadius: '4px' }}>
+                        ⚠️ {error}
+                    </div>
+                    <div className="products-grid">
+                        {filteredProducts.map((product) => (
+                            <ProductCard
+                                key={product.id}
+                                product={product}
+                            />
+                        ))}
+                    </div>
                 </div>
             ) : (
                 <div className="products-grid">

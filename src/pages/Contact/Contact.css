@@ -108,3 +108,9 @@
     border-radius: 5px;
     cursor: pointer;
 }
+.error-message {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: block;
+}

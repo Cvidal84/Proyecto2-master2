@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { products as mockProducts } from '../../data/products'
+
 import SearchBar from '../../components/SearchBar/SearchBar'
 import ProductCard from '../../components/ProductCard/ProductCard'
 import './Home.css'
@@ -30,9 +30,8 @@ const Home = () => {
                 clearTimeout(timeoutId);
             })
             .catch(err => {
-                console.warn("Fetch failed or timed out, using mock data.", err);
-                setProducts(mockProducts);
-                setError("API unavailable. Showing offline data.");
+                console.error("Fetch failed:", err);
+                setError("Failed to load products from API.");
                 setLoading(false);
             })
 

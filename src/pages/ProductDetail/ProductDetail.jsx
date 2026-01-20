@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import './ProductDetail.css';
 import { useCart } from "../../context/CartContext";
 
 const ProductDetail = () => {
     const { addToCart } = useCart();
+    const navigate = useNavigate();
     const { id } = useParams(); // Obtenemos el ID del producto
     const [product, setProduct] = useState(null); // Inicializamos el producto
     const [loading, setLoading] = useState(true); // Inicializamos el loading
@@ -28,7 +29,10 @@ const ProductDetail = () => {
                 <p className="product-price">{product.price}€</p>
                 <p className="product-description">{product.description}</p>
                 <p className="product-rating">Rating: {product.rating.rate} ({product.rating.count} reviews)</p>
-                <button onClick={() => addToCart(product)}>Add to Cart</button>
+                <div className="product-buttons">
+                    <button onClick={() => addToCart(product)}>Add to Cart</button>
+                    <button className="back-btn" onClick={() => navigate(-1)}>Back</button>
+                </div>
             </div>
         </div>
     )
